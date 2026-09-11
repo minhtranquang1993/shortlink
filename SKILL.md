@@ -4,12 +4,45 @@ description: >
   Rut gon URL bang TinyURL API. Trigger khi user go "/shortlink <url>", "rut gon link nay",
   "tao short link", "shorten url", hoac gui 1 URL dai kem yeu cau rut gon. Ho tro custom alias,
   batch nhieu URL, va liet ke link da tao.
-argument-hint: "<url> [--alias ten-tuy-chinh] | --batch <file> | --list"
+argument-hint: "<url> [--alias ten-tuy-chinh] | --batch <file> | --list | --huongdan"
 ---
 
 # /shortlink — TinyURL Shortener
 
 Rut gon URL nhanh bang [TinyURL API](https://tinyurl.com/app/dev).
+
+## `--huongdan` — Cheat sheet (in ra rồi DỪNG)
+
+**Trigger:** lệnh chứa `--huongdan`, `--help`, `-h`, `huongdan`, `hướng dẫn` (vd `/shortlink --huongdan`).
+**Hành vi:** in nguyên khối 📌 dưới đây ra chat rồi **DỪNG** — không gọi TinyURL API, không đọc file batch, không tạo link.
+
+### 📌 /shortlink — Rút gọn URL bằng TinyURL
+
+**Làm gì:** rút gọn 1 hoặc nhiều URL qua TinyURL API, hỗ trợ alias tuỳ chỉnh và liệt kê link đã tạo.
+
+**Cú pháp:** `/shortlink <url> [--alias <tên>] | --batch <file> | --list`
+
+| Tham số | Bắt buộc | Ý nghĩa |
+|---|---|---|
+| `<url>` | ✅* | URL cần rút gọn (*trừ khi dùng `--batch` / `--list`) |
+| `--alias <tên>` | ❌ | Alias tuỳ chỉnh cho link |
+| `--batch <file>` | ❌ | File mỗi dòng 1 URL |
+| `--list` | ❌ | Liệt kê link đã tạo trước đó |
+| `--json` | ❌ | Xuất raw JSON để parse tiếp |
+
+**Ví dụ**
+1. `/shortlink https://matquoctednd.vn/bang-gia-mo-can-thi/`
+2. `/shortlink https://example.com/abc --alias sale-2026`
+3. `/shortlink --batch urls.txt`
+4. `/shortlink --list`
+
+**Output:** link ngắn dạng `https://tinyurl.com/xxxx` (hoặc alias), kèm URL gốc.
+
+**Lưu ý**
+- Cần set 1 lần: `export TINYURL_API_KEY="<key>"` (lấy tại tinyurl.com/app/settings/api).
+- KHÔNG hardcode key vào code hay commit lên repo public. Key bị lộ → revoke và tạo lại.
+
+---
 
 ## When to Use
 
